@@ -33,9 +33,9 @@ var userSchema = mongoose.Schema({
 // compiels our schema into a model
 var User = mongoose.model('User', userSchema);
 
-// add user1 and user2 to "User" model
 var user1 = new User({ username: 'gchoi', age: 30 });
 var user2 = new User({ username: 'jmpark', age: 29 });
+ 
 
 // save user1
 user1.save(function (err, user1) {
