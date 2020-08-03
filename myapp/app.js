@@ -3,12 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyparser = require('body-parser');
+var mongoose = require('mongoose');
 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongod server");
+});
+mongoose.connect('mongodb://localhost/mongodb_tutorial');
+
+//mongo
+app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyparser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
