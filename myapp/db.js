@@ -14,13 +14,13 @@ db.once('open', function  () {
 
 //db schema
 // creates DB schema
-var userSchema = mongoose.Schema({
-  username: 'string',
-  age: 'number'
-});
+// var userSchema = mongoose.Schema({
+//   username: 'string',
+//   age: 'number'
+// });
 
-// compiels our schema into a model
-var User = mongoose.model('User', userSchema);
+// // compiels our schema into a model
+// var User = mongoose.model('User', userSchema);
 
 // var user1 = new User({ username: 'gchoi', age: 30 });
 // var user2 = new User({ username: 'jmpark', age: 29 });
