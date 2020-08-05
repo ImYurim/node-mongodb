@@ -2,8 +2,10 @@ var mongoose = require('mongoose');
 
 
 var userSchema = mongoose.Schema({
-    username: 'string',
-    age: 'number'
+    name: 'string',
+    age: 'number',
+    password: 'string',
+    id:'string'
   });
   
   // compiels our schema into a model
