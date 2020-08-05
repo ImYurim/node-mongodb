@@ -11,8 +11,10 @@ var userSchema = mongoose.Schema({
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
   
+  module.exports = User;
 
 
+  
 // var user1 = new User({ username: 'gchoi', age: 30 });
 // var user2 = new User({ username: 'jmpark', age: 29 });
  
@@ -28,4 +30,3 @@ var userSchema = mongoose.Schema({
 // if (err) // TODO handle the error
 //     console.log("error");
 // });
-  module.exports = User;
