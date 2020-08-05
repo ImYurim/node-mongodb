@@ -49,4 +49,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+//Model
+var User = require('./models/usermodel');
+
+
 module.exports = app;
