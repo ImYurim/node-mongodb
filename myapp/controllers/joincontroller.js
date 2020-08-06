@@ -14,17 +14,21 @@ exports.createuser=(req,res)=>{
     user.age = req.body.userage;
 
 
-    user.save(function(err,user){
+    User.create(user,(err,user)=>{
         if(err){
             console.error(err);
-            res.json({result:0});
-            return;
+            res.status(404).send({
+                message:"you are already member"
+            });
+        }
+        else{
+            res.status(300).send({
+                message:"register success"
+            });
         }
 
-        res.json({result:1});
     });
 
-    console.log('data : '+req.body.username+req.body.userpassword+req.body.userage + req.body.userid);
 
 };
 

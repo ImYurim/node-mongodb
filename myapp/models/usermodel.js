@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 
+
 var userSchema = mongoose.Schema({
     name: 'string',
     age: 'number',
@@ -11,10 +12,22 @@ var userSchema = mongoose.Schema({
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
   
+
+  User.create = (newuser, result) => {
+      if (newuser.id){
+
+      }
+
+  }
+
+
+
+
+
   module.exports = User;
 
 
-  
+
 // var user1 = new User({ username: 'gchoi', age: 30 });
 // var user2 = new User({ username: 'jmpark', age: 29 });
  
