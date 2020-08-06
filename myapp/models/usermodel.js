@@ -12,6 +12,7 @@ var userSchema = mongoose.Schema({
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
   
+  //아이디 비밀번호 암호화해서 저장
 
   User.create = (newuser, result) => {
     newuser.save(function (err, newuser){
@@ -29,6 +30,8 @@ var userSchema = mongoose.Schema({
  
     }
 
+    //로그인 session 
+    //구글 로그인
 
     // User.findById = (newuser, result)=>{
     //     newuser.find({"id":newuser.id}).toArray(function(err,docs){
