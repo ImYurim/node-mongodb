@@ -33,7 +33,6 @@ app.use('/users', usersRouter);
 
 //join
 app.use('/join',joinRouter);
-app.use('/join/create',joinRouter);
 
 
 // catch 404 and forward to error handler
