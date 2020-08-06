@@ -14,11 +14,22 @@ var userSchema = mongoose.Schema({
   
 
   User.create = (newuser, result) => {
-      if (newuser.id){
+    newuser.save(function (err, newuser){
+        if (err) {// TODO handle the error
+            console.log("error");
+            result(err,null);
+            return;
+        }
+        else {
+            console.log("done");
+            result(null);
+            return;
+        }
+        });
+ 
+    }
 
-      }
-
-  }
+  
 
 
 
