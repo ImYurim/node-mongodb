@@ -29,3 +29,6 @@ exports.createuser=(req,res)=>{
 };
 
 
+exports.renderloginform=(req,res)=>{
+    res.render("join/loginform");
+}
