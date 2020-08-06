@@ -29,6 +29,23 @@ var userSchema = mongoose.Schema({
  
     }
 
+
+    // User.findById = (newuser, result)=>{
+    //     newuser.find({"id":newuser.id}).toArray(function(err,docs){
+    //         if (err){
+    //             console.log("not found");
+    //             result(err,null);
+    //             return;
+    //         }
+    //         else{
+    //             console.log("found!");
+    //             result(null);
+    //             return;
+
+    //         }
+    //     })
+    // }
+
   
 
 

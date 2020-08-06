@@ -36,3 +36,28 @@ exports.createuser=(req,res)=>{
 exports.renderloginform=(req,res)=>{
     res.render("join/loginform");
 }
+
+// exports.userlogin = (req,res)=>{
+   
+//     var user = new User();
+//     user.password = req.body.userpassword;
+//     user.id = req.body.userid;
+
+
+
+//     User.findById(user,(err,user)=>{
+//         if(err){
+//             console.error(err);
+//             res.status(404).send({
+//                 message:"you are not a member"
+//             });
+//         }
+//         else{
+//             res.status(300).send({
+//                 message:"find success"
+//             });
+//         }
+
+//     });
+   
+// }
