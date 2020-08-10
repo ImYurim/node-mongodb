@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 
 
@@ -8,11 +9,27 @@ var userSchema = mongoose.Schema({
     password: 'string',
     id:'string'
   });
+
+
+  userSchema.pre('save', function(next) {
+    const user = this;
+    const saltFactor = 10;
+    bcrypt.genSalt(saltFactor, (err, salt) => { // Salt 생성
+      if (err) return next(err);
+   
+      bcrypt.hash(user.password, salt, (err, hash) => {  // Hash생성
+        if (err) return next(err);
+        user.password = hash;  // Hash값 pwd에 저장
+        next();
+      });
+    });
+  });
   
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
   
   //아이디 비밀번호 암호화해서 저장
+
 
   User.create = (newuser, result) => {
     newuser.save(function (err, newuser){
