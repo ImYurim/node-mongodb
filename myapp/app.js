@@ -11,8 +11,6 @@ var helmet = require('helmet');
 var assert = require('assert');
 var async = require('async');
 
-//passport
-var pass
 
 //session
 var http = require('http');

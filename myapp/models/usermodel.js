@@ -31,10 +31,7 @@ var userSchema = mongoose.Schema({
 
   
   User.create = (newuser, result) => {
-    if(User.find({"id":newuser.id})){
-        result('already exists',newuser);
-    }
-    else{
+
     newuser.save(function (err, newuser){
 
         try {
@@ -48,9 +45,9 @@ var userSchema = mongoose.Schema({
             result(err,null);
             return;
         }
-        });
+    });
  
-    }
+    
 }
 
 // User.find = (newuser, result) => {
