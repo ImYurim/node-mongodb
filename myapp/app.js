@@ -5,6 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyparser = require('body-parser');
 
+//session
+var http = require('http');
+var expressSession = require('express-session');
+
+
 var app = express();
 
 //db
@@ -15,6 +20,9 @@ var usersRouter = require('./routes/users');
 
 //join
 var joinRouter = require('./routes/join/joinform');
+
+//class
+var classroomRouter = require('./routes/class/myclassroom');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +35,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//session
+app.use(expressSession({
+  secret:'my key',
+  resave:true,
+  saveUninitialized:true
+}));
+
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -34,6 +52,8 @@ app.use('/users', usersRouter);
 //join
 app.use('/join',joinRouter);
 
+//classroom
+app.use('/classroom',classroomRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

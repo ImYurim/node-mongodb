@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
     id:'string'
   });
 
-
+  //비밀번호 암호화해서 저장
   userSchema.pre('save', function(next) {
     const user = this;
     const saltFactor = 10;
@@ -27,12 +27,10 @@ var userSchema = mongoose.Schema({
   
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
+
   
-  //아이디 비밀번호 암호화해서 저장
-
-
   User.create = (newuser, result) => {
-      
+
     newuser.save(function (err, newuser){
         if (err) {// TODO handle the error
             console.log("error");
