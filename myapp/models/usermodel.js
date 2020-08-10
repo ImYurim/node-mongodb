@@ -30,11 +30,15 @@ var userSchema = mongoose.Schema({
 
   
   User.create = (newuser, result) => {
-
+    if(User.find({"id":newuser.id})){
+        result(" already exists",newuser.id);
+        return;
+    }
+    else{
     newuser.save(function (err, newuser){
         if (err) {// TODO handle the error
             console.log("error");
-            result(err,null);
+            result(err,"just error");
             return;
         }
         else {
@@ -45,6 +49,7 @@ var userSchema = mongoose.Schema({
         });
  
     }
+}
 
     //로그인 session 
     //구글 로그인

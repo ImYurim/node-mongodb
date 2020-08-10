@@ -17,9 +17,16 @@ exports.createuser=(req,res)=>{
     User.create(user,(err,user)=>{
         if(err){
             console.error(err);
-            res.status(404).send({
-                message:"you are already member"
-            });
+            if(user){
+                res.status(404).send({
+                    message:  user + err
+                });
+            }else{
+                res.status(404).send({
+                    message: err
+                });                
+            }
+
         }
         else{
             res.status(300).send({
