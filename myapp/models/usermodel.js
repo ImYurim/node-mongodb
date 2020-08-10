@@ -32,6 +32,7 @@ var userSchema = mongoose.Schema({
 
 
   User.create = (newuser, result) => {
+      
     newuser.save(function (err, newuser){
         if (err) {// TODO handle the error
             console.log("error");
