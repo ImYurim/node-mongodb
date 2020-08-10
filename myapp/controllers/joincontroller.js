@@ -19,7 +19,7 @@ exports.createuser=(req,res)=>{
             console.error(err);
             if(user){
                 res.status(404).send({
-                    message:  user + err
+                    message:  user.id + err
                 });
             }else{
                 res.status(404).send({
