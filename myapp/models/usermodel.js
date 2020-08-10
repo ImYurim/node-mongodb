@@ -1,29 +1,30 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-
+mongoose.set('useCreateIndex',true); //warning 메세지 제거 
 
 var userSchema = mongoose.Schema({
-    name: 'string',
+    name: {type: String, require:true},
     age: 'number',
-    password: 'string',
-    id:'string'
+    password: {type: String, require:true},
+    id:{type: String, require:true, unique:true},
+    googleid:'number',
   });
 
-  //비밀번호 암호화해서 저장
-  userSchema.pre('save', function(next) {
-    const user = this;
-    const saltFactor = 10;
-    bcrypt.genSalt(saltFactor, (err, salt) => { // Salt 생성
-      if (err) return next(err);
+//   //비밀번호 암호화해서 저장
+//   userSchema.pre('save', function(next) {
+//     const user = this;
+//     const saltFactor = 10;
+//     bcrypt.genSalt(saltFactor, (err, salt) => { // Salt 생성
+//       if (err) return next(err);
    
-      bcrypt.hash(user.password, salt, (err, hash) => {  // Hash생성
-        if (err) return next(err);
-        user.password = hash;  // Hash값 pwd에 저장
-        next();
-      });
-    });
-  });
+//       bcrypt.hash(user.password, salt, (err, hash) => {  // Hash생성
+//         if (err) return next(err);
+//         user.password = hash;  // Hash값 pwd에 저장
+//         next();
+//       });
+//     });
+//   });
   
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
@@ -31,8 +32,7 @@ var userSchema = mongoose.Schema({
   
   User.create = (newuser, result) => {
     if(User.find({"id":newuser.id})){
-        result(" already exists",newuser);
-        return;
+        result('already exists',newuser);
     }
     else{
     newuser.save(function (err, newuser){
@@ -45,7 +45,7 @@ var userSchema = mongoose.Schema({
 
         catch (err) {// TODO handle the error
             console.log("error");
-            result(err,"just error");
+            result(err,null);
             return;
         }
         });
@@ -55,7 +55,10 @@ var userSchema = mongoose.Schema({
 
 // User.find = (newuser, result) => {
 //     if(User.find({"id":newuser.id})){
-        
+//         result("user found",newuser);
+//         return;
+//     }else{
+
 //     }
 // }
 

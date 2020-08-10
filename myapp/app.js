@@ -4,10 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyparser = require('body-parser');
+var passport = require('./models/passport');
+var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
+var helmet = require('helmet');
+var assert = require('assert');
+var async = require('async');
+
+//passport
+var pass
 
 //session
 var http = require('http');
-var expressSession = require('express-session');
+var session = require('express-session');
 
 
 var app = express();
@@ -37,12 +46,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //session
-app.use(expressSession({
-  secret:'my key',
+app.use(session({
+  secret:'kekekekekekey',
   resave:true,
-  saveUninitialized:true
+  saveUninitialized:true,
+  store:store,
+  rolling:true
 }));
 
+var mongodbstore = require('connect-mongodb-session')(session);
+var store = new mongodbstore({
+  uri:'mongodb://localhost:27017/lmsdb',
+  collection:'mySessions'
+
+});
+
+store.on('error',function(error){
+  assert.ifError(error);
+  assert.ok(false);
+});
+/////session////
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 
 app.use('/', indexRouter);
