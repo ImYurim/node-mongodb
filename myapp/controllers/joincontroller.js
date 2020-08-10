@@ -14,6 +14,9 @@ exports.createuser=(req,res)=>{
     user.age = req.body.userage;
 
 
+
+    //여기에 아이디 비밀번호 등등 유효성 검사
+
     User.create(user,(err,user)=>{
         if(err){
             console.error(err);
