@@ -31,33 +31,33 @@ var userSchema = mongoose.Schema({
 
   
   User.create = (newuser, result) => {
+    if(User.find({id:newuser.id})){
+        result('already exists',newuser.id);
+        return;
+    }
+    else{
+        
+        newuser.save(function (err, newuser){
 
-    newuser.save(function (err, newuser){
+            try {
+                console.log("done");
+                result(null);
+                return;
+            }
 
-        try {
-            console.log("done");
-            result(null);
-            return;
-        }
+            catch (err) {// TODO handle the error
+                console.log("error");
+                result(err,newuser.id);
+                return;
+            }
+        });
+    }
 
-        catch (err) {// TODO handle the error
-            console.log("error");
-            result(err,null);
-            return;
-        }
-    });
- 
     
 }
 
-// User.find = (newuser, result) => {
-//     if(User.find({"id":newuser.id})){
-//         result("user found",newuser);
-//         return;
-//     }else{
 
-//     }
-// }
+
 
     //로그인 session 
     //구글 로그인
