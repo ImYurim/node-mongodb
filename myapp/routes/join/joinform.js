@@ -6,6 +6,7 @@ var controller = require('../../controllers/joincontroller');
 router.get('/', controller.renderjoinform);
 router.post('/create',controller.createuser);
 router.get('/loginform',controller.renderloginform);
+router.post('/login',controller.userlogin);
 
 // router.get('/login',controller.userlogin);
 

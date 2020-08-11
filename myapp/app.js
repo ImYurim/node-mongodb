@@ -63,6 +63,11 @@ store.on('error',function(error){
   assert.ifError(error);
   assert.ok(false);
 });
+
+app.use(helmet.hsts({
+  maxAge:10886400000,
+  includeSubDomains:true
+}));
 /////session////
 
 //passport

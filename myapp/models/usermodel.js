@@ -28,35 +28,68 @@ var userSchema = mongoose.Schema({
   
   // compiels our schema into a model
   var User = mongoose.model('User', userSchema);
-
+ 
   
   User.create = (newuser, result) => {
-    if(User.find({id:newuser.id})){
-        result('already exists',newuser.id);
-        return;
-    }
-    else{
-        
-        newuser.save(function (err, newuser){
+      User.find({"id":newuser.id}, function(err,user){
+          if(user.length > 0){
+            result('already exists', user.id);
+            console.log(user);
+            return;
+          }
 
-            try {
-                console.log("done");
-                result(null);
-                return;
-            }
-
-            catch (err) {// TODO handle the error
-                console.log("error");
-                result(err,newuser.id);
-                return;
-            }
-        });
+          else{
+            newuser.save((err, newuser)=>{
+    
+                try {
+                    console.log("done");
+                    result(null);
+                    return;
+                }
+    
+                catch (err) {// TODO handle the error
+                    console.log("error");
+                    result(err,newuser.id);
+                    return;
+                }
+            });
+          }
+        })
     }
+    
 
     
-}
+//       })
+    
+// }
 
+// User.create = (newuser, result) => {
+//     let usercheck = User.find({"id":newuser.id});
+//     usercheck.getFilter();
+//     console.log(usercheck.getFilter());
+//     if(usercheck){
+//         console.log("mongo: " + User.find({"id":newuser.id}).exec());
+//         console.log(newuser.id);
+//         result('already exists',newuser.id);
+//     }
+//     else{
+//     newuser.save( (err, newuser)=>{
 
+//         try {
+//             console.log("done");
+//             result(null); 
+//             return;
+//         }
+
+//         catch (err) {// TODO handle the error
+//             console.log("error");
+//             result(err,null);
+//             return;
+//         }
+//         });
+ 
+//     }
+// }
 
 
     //로그인 session 
@@ -84,8 +117,7 @@ var userSchema = mongoose.Schema({
 
 
 
-  module.exports = User;
-
+module.exports = User;
 
 
 // var user1 = new User({ username: 'gchoi', age: 30 });
@@ -102,4 +134,4 @@ var userSchema = mongoose.Schema({
 // user2.save(function (err, user2) {
 // if (err) // TODO handle the error
 //     console.log("error");
-// });
+// })
