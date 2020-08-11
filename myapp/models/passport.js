@@ -17,6 +17,8 @@ var flash = require('connect-flash');
 
   });
 
+  //findOne 못한다.
+
   passport.use('local-login', new LocalStrategy({ // local 전략을 세움
     usernameField: 'userid',
     passwordField: 'password',
