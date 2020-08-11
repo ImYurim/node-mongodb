@@ -12,7 +12,7 @@ exports.createuser=(req,res)=>{
     var user = new User();
     user.name = req.body.username;
     user.password = req.body.userpassword;
-    user.id = req.body.userid;
+    user.userid = req.body.userid;
     user.age = req.body.userage;
 
 
@@ -44,19 +44,18 @@ exports.renderloginform=(req,res)=>{
 }
 
 
-exports.userlogin=(req,res,next)=>{
-    req.flash("id");
-    if(req.body.id.length===0 || req.body.password.length===0){
+// exports.userlogin=(req,res,next)=>{
+//     if(req.body.id.length===0 || req.body.password.length===0){
 
-        res.redirect('/loginform');
-    }else{
-        next();
-    }
-}, passport.authenticate('local-login',{
-    successRedirect : '/classroom',
-    failureRedirect: '/loginform',
-    failureFlash: true
-});
+//         res.redirect('/loginform');
+//     }else{
+//         next();
+//     }
+// }, passport.authenticate('local-login',{
+//     successRedirect : '/classroom',
+//     failureRedirect: '/loginform',
+//     failureFlash: true
+// });
 
 
 

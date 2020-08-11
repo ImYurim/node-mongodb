@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var passportLocalMongoose = require('passport-local-mongoose');
 
 mongoose.set('useCreateIndex',true); //warning 메세지 제거 
 
@@ -7,9 +8,11 @@ var userSchema = mongoose.Schema({
     name: {type: String, require:true},
     age: 'number',
     password: {type: String, require:true},
-    id:{type: String, require:true, unique:true},
+    userid:{type: String, require:true, unique:true},
     googleid:'number',
   });
+
+  userSchema.plugin(passportLocalMongoose);
 
 //   //비밀번호 암호화해서 저장
 //   userSchema.pre('save', function(next) {
@@ -31,9 +34,9 @@ var userSchema = mongoose.Schema({
  
   
   User.create = (newuser, result) => {
-      User.find({"id":newuser.id}, function(err,user){
-          if(user.length > 0){
-            result('already exists', user.id);
+      User.findOne({"id":newuser.userid}, function(err,user){
+          if(user){
+            result('already exists', user.userid);
             console.log(user);
             return;
           }
@@ -49,7 +52,7 @@ var userSchema = mongoose.Schema({
     
                 catch (err) {// TODO handle the error
                     console.log("error");
-                    result(err,newuser.id);
+                    result(err,newuser.userid);
                     return;
                 }
             });
