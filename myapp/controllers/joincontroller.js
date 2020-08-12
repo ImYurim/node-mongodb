@@ -9,11 +9,15 @@ exports.renderjoinform = (req,res)=>{
 
 exports.createuser=(req,res)=>{
 
-    var user = new User();
-    user.name = req.body.username;
-    user.password = req.body.userpassword;
-    user.userid = req.body.userid;
-    user.age = req.body.userage;
+
+    var user = new User({
+        name : req.body.username,
+        password : req.body.userpassword,
+        id : req.body.userid,
+        age : req.body.userage
+    });
+    console.log("this is request.");
+    console.log(user);
 
 
 

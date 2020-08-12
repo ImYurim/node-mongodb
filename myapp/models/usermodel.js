@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     name: {type: String, require:true},
     age: 'number',
     password: {type: String, require:true},
-    userid:{type: String, require:true, unique:true},
+    id:{type: String, require:true, unique:true},
     googleid:'number',
   });
 
@@ -34,65 +34,36 @@ var userSchema = mongoose.Schema({
  
   
   User.create = (newuser, result) => {
-      User.findOne({"id":newuser.userid}, function(err,user){
-          if(user){
-            result('already exists', user.userid);
-            console.log(user);
+      User.find({"id":newuser.id}, function(err,user){
+          if(user.length>0){
+            result('already exists', user.id);
             return;
           }
 
           else{
+            console.log("this is in modelfile");
+            console.log(newuser);
+
             newuser.save((err, newuser)=>{
     
                 try {
                     console.log("done");
-                    result(null);
+                    result(null,null);
                     return;
                 }
     
                 catch (err) {// TODO handle the error
                     console.log("error");
-                    result(err,newuser.userid);
+                    result(err,newuser.id);
                     return;
                 }
             });
           }
-        })
-    }
+        });
+    };
     
 
     
-//       })
-    
-// }
-
-// User.create = (newuser, result) => {
-//     let usercheck = User.find({"id":newuser.id});
-//     usercheck.getFilter();
-//     console.log(usercheck.getFilter());
-//     if(usercheck){
-//         console.log("mongo: " + User.find({"id":newuser.id}).exec());
-//         console.log(newuser.id);
-//         result('already exists',newuser.id);
-//     }
-//     else{
-//     newuser.save( (err, newuser)=>{
-
-//         try {
-//             console.log("done");
-//             result(null); 
-//             return;
-//         }
-
-//         catch (err) {// TODO handle the error
-//             console.log("error");
-//             result(err,null);
-//             return;
-//         }
-//         });
- 
-//     }
-// }
 
 
     //로그인 session 
