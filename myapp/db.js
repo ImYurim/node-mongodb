@@ -1,5 +1,6 @@
 
 var mongoose = require('mongoose');
+const { Double } = require('mongodb');
 
 
 mongoose.Promise = global.Promise; // mongoDB 버전 4.11 이상부터 해주어야 에러 안남

@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     name: {type: String, require:true},
     age: 'number',
     password: {type: String, require:true},
-    id:{type: String, require:true, unique:true},
+    userid:{type: String, require:true, unique:true},
     googleid:'number',
   });
 
@@ -34,27 +34,28 @@ var userSchema = mongoose.Schema({
  
   
   User.create = (newuser, result) => {
-      User.find({"id":newuser.id}, function(err,user){
+      User.find({"userid":newuser.userid}, function(err,user){
           if(user.length>0){
-            result('already exists', user.id);
+            result('already exists', user.userid);
             return;
           }
 
           else{
             console.log("this is in modelfile");
             console.log(newuser);
+ 
 
             newuser.save((err, newuser)=>{
     
                 try {
                     console.log("done");
-                    result(null,null);
+                    result(null);
                     return;
                 }
     
                 catch (err) {// TODO handle the error
                     console.log("error");
-                    result(err,newuser.id);
+                    result(err,newuser.userid);
                     return;
                 }
             });

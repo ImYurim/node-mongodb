@@ -13,7 +13,7 @@ exports.createuser=(req,res)=>{
     var user = new User({
         name : req.body.username,
         password : req.body.userpassword,
-        id : req.body.userid,
+        userid : req.body.userid,
         age : req.body.userage
     });
     console.log("this is request.");
